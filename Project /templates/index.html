@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sleep Detox Optimizer</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+  <script defer src="/static/js/script.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Sleep Detox Optimizer 💬</h1>
+      <p>Your AI Health Chatbot Companion</p>
+    </header>
+
+    <!-- Detox Scores as Cards -->
+    <section id="detox-scores" class="score-cards">
+      <div class="card brain">
+        <h3>🧠 Brain Detox</h3>
+        <p class="score-value" id="brain-score">N/A</p>
+        <p class="score-desc">Cognitive clarity improving</p>
+      </div>
+      <div class="card heart">
+        <h3>❤️ Heart Detox</h3>
+        <p class="score-value" id="heart-score">N/A</p>
+        <p class="score-desc">Circulation optimized</p>
+      </div>
+      <div class="card liver">
+        <h3>🩺 Liver Detox</h3>
+        <p class="score-value" id="liver-score">N/A</p>
+        <p class="score-desc">Toxin levels reduced</p>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+      <h2>🌙 What is Sleep Detox?</h2>
+      <p>
+        Sleep Detox Optimizer is your smart assistant designed to monitor and enhance your nightly recovery.
+        It analyzes hydration, stress, screen time, and routine to generate personalized detox scores and tips.
+      </p>
+    </section>
+
+    <!-- How It Works -->
+    <section id="info">
+      <h2>⚙️ How It Works</h2>
+      <ul>
+        <li>🧪 Tracks your hydration, dinner time, screen exposure & stress levels</li>
+        <li>📊 Calculates detox impact on Brain, Heart, and Liver systems</li>
+        <li>🤖 AI chatbot offers tips to boost your sleep detox effectiveness</li>
+      </ul>
+    </section>
+
+    <!-- Benefits Section -->
+    <section id="benefits">
+      <h2>✨ Why Use This?</h2>
+      <div class="score-cards">
+        <div class="card">
+          <h3>🔋 Boost Energy</h3>
+          <p class="score-desc">Wake up refreshed and recharged</p>
+        </div>
+        <div class="card">
+          <h3>🧘 Reduce Stress</h3>
+          <p class="score-desc">Better sleep, calmer mind</p>
+        </div>
+        <div class="card">
+          <h3>🌿 Liver Support</h3>
+          <p class="score-desc">Improve detoxification naturally</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Graphs Section -->
+    <section id="graphs">
+      <h2>📈 Detox Progress Over Time</h2>
+      <div id="graph-container">
+        <div id="brain-graph">Brain Detox Graph Here</div>
+        <div id="heart-graph">Heart Detox Graph Here</div>
+        <div id="liver-graph">Liver Detox Graph Here</div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Chatbot Icon -->
+  <div id="chatbot-icon" onclick="toggleChatbot()">💬</div>
+
+  <!-- Chatbot Popup -->
+  <div id="chatbot-popup">
+    <div id="chatbox">
+      <div class="chat-message bot">👋 Hello! I'm your Detox Assistant. How can I help you today?</div>
+      <div id="chat-output" class="space-y-4 mb-4"></div>
+    </div>
+    <input type="text" id="user-input" placeholder="Type your message..." autocomplete="off" />
+    <button onclick="sendMessage()">Send</button>
+  </div>
+
+</body>
+</html>

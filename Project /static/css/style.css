@@ -1,0 +1,190 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to right, #33c8af, #e8dfdf);
+  color: #2b2b2b;
+  margin: 0;
+  padding: 0;
+}
+
+/* Container */
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 2rem;
+}
+
+/* Header */
+header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  color: #0b2545;
+  margin-bottom: 0.5rem;
+}
+
+header p {
+  color: #4b5563;
+  font-size: 1.1rem;
+}
+
+/* === Detox Score Cards === */
+.score-cards {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: #f7faff;
+  flex: 1 1 30%;
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #dbeafe;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.1);
+}
+
+.card h3 {
+  margin-bottom: 0.5rem;
+  font-size: 1.4rem;
+  color: #1e3a8a;
+}
+
+.score-value {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #2563eb;
+  margin: 0.7rem 0;
+}
+
+.score-desc {
+  font-size: 1rem;
+  color: #64748b;
+}
+
+/* === Graphs Section === */
+#graphs {
+  margin-bottom: 2rem;
+}
+
+#graphs h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 1.6rem;
+  color: #0f172a;
+}
+
+#graph-container > div {
+  background: #e0f2fe;
+  height: 160px;
+  margin-bottom: 1rem;
+  border-radius: 12px;
+  text-align: center;
+  line-height: 160px;
+  font-weight: bold;
+  color: #0284c7;
+  border: 1px dashed #60a5fa;
+}
+
+/* === Chatbot Icon & Popup === */
+#chatbot-icon {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: linear-gradient(to right, #3b82f6, #60a5fa);
+  color: white;
+  padding: 16px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 26px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+  z-index: 999;
+  transition: transform 0.2s ease;
+}
+
+#chatbot-icon:hover {
+  transform: scale(1.15);
+}
+
+#chatbot-popup {
+  display: none;
+  position: fixed;
+  bottom: 85px;
+  right: 20px;
+  width: 320px;
+  background-color: white;
+  border: 2px solid #60a5fa;
+  padding: 16px;
+  border-radius: 14px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+  z-index: 998;
+
+  /* Add this */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 400px;
+}
+
+#chatbox {
+  flex: 1;
+  max-height: 220px;
+  overflow-y: auto;
+  background: #f1f5f9;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+
+
+.chat-message {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.chat-message.bot {
+  background-color: #dbeafe;
+}
+
+.chat-message.user {
+  background-color: #ccfbf1;
+  text-align: right;
+}
+
+/* These two should stay within the popup now */
+#user-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(to right, #3b82f6, #60a5fa);
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 12px;
+  transition: background-color 0.2s ease;
+}
+
+button:hover {
+  background: #2563eb;
+}
