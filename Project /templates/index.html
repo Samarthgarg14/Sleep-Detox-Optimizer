@@ -9,12 +9,14 @@
 </head>
 <body>
   <div class="container">
-    <header>
+
+    <!-- Header Section -->
+    <header id="header">
       <h1>Sleep Detox Optimizer 💬</h1>
       <p>Your AI Health Chatbot Companion</p>
     </header>
 
-    <!-- Detox Scores as Cards -->
+    <!-- Detox Scores Section -->
     <section id="detox-scores" class="score-cards">
       <div class="card brain">
         <h3>🧠 Brain Detox</h3>
@@ -35,21 +37,38 @@
 
     <!-- About Section -->
     <section id="about">
-      <h2>🌙 What is Sleep Detox?</h2>
-      <p>
-        Sleep Detox Optimizer is your smart assistant designed to monitor and enhance your nightly recovery.
-        It analyzes hydration, stress, screen time, and routine to generate personalized detox scores and tips.
-      </p>
+      <h2>🌙 What is Sleep Detox Optimizer?</h2>
+      <p>Sleep Detox Optimizer is your smart assistant designed to monitor and enhance your nightly recovery.
+        It analyzes hydration, stress, screen time, and routine to generate personalized detox scores and tips.</p>
     </section>
 
-    <!-- How It Works -->
-    <section id="info">
+    <!-- Science Behind Sleep Detox Section -->
+    <section id="science">
+      <h2>🧠 The Science Behind Sleep Detox</h2>
+      <p>During deep sleep, the brain’s glymphatic system clears out metabolic waste, reducing the risk of cognitive decline.
+        Similarly, liver detox processes are most active during early night hours, and heart rate variability reflects recovery quality.</p>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works">
       <h2>⚙️ How It Works</h2>
       <ul>
         <li>🧪 Tracks your hydration, dinner time, screen exposure & stress levels</li>
         <li>📊 Calculates detox impact on Brain, Heart, and Liver systems</li>
         <li>🤖 AI chatbot offers tips to boost your sleep detox effectiveness</li>
       </ul>
+    </section>
+
+    <!-- Steps to Maximize Detox Section -->
+    <section id="steps">
+      <h2>🛌 Steps to Maximize Detox</h2>
+      <ol>
+        <li>💧 Drink enough water (at least 6-8 glasses daily)</li>
+        <li>🍽️ Finish your dinner 2 hours before sleep</li>
+        <li>📵 Reduce screen time 1 hour before bed</li>
+        <li>🧘 Practice breathing exercises to lower stress</li>
+        <li>🛏️ Aim for 7-8 hours of deep, restful sleep</li>
+      </ol>
     </section>
 
     <!-- Benefits Section -->
@@ -80,6 +99,22 @@
         <div id="liver-graph">Liver Detox Graph Here</div>
       </div>
     </section>
+
+    <!-- FAQs Section -->
+    <section id="faq">
+      <h2>❓ Frequently Asked Questions</h2>
+      <div>
+        <h4>Q1: How is Detox Score calculated?</h4>
+        <p>Detox Score is based on your hydration, dinner timing, screen usage, stress level, and wearable health data like sleep, HRV, and SpO₂.</p>
+
+        <h4>Q2: Is this medically certified?</h4>
+        <p>No, this is a wellness tracking tool. It is not a substitute for professional medical advice.</p>
+
+        <h4>Q3: Can I improve my detox scores?</h4>
+        <p>Absolutely! Small daily changes like earlier dinner, more water, and less screen time can boost your scores.</p>
+      </div>
+    </section>
+
   </div>
 
   <!-- Chatbot Icon -->
@@ -91,6 +126,11 @@
     <input type="text" id="user-input" placeholder="Type your message..." autocomplete="off" />
     <button onclick="sendMessage()">Send</button>
   </div>
+  
+  <!-- Footer Section -->
+<footer id="footer">
+  <p>⚠️ Sleep Detox Optimizer is currently a prototype. While we aim to provide valuable insights, it is not a substitute for professional medical advice. Please consult a doctor or healthcare professional for personalized health guidance.</p>
+</footer>
 
 </body>
 </html>

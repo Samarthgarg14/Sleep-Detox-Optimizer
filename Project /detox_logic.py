@@ -1,71 +1,63 @@
 import random
 
 def calculate_detox_scores(data):
-    # Sample input data based on user inputs
+    # Fetch data with fallbacks
     water = data.get("water", 0)
-    dinner = data.get("meal", "20:00")  # Dinner time in HH:MM
-    screen = data.get("screen_time", 0)  # Screen time in hours
-    stress = data.get("stress", 3)  # Stress level (0-10 scale)
-    hr = data.get("heart_rate", 70)  # Heart rate (e.g., 70 bpm)
-    sleep = data.get("sleep", 6)  # Sleep duration in hours
-    pulse = data.get("pulse", 75)  # Pulse rate (e.g., 75 bpm)
-    exercise = data.get("exercise", 0)  # Exercise in minutes per week
+    dinner = data.get("meal", "20:00")
+    screen = data.get("screen_time", 0)
+    stress = data.get("stress", 3)
+    hr = data.get("heart_rate", random.randint(50, 130))
+    sleep = data.get("sleep", 6)
+    pulse = data.get("pulse", 75)
+    exercise = data.get("exercise", 0)
 
-    # **Brain Detox Score Calculation:**
-    # Brain detox affected by screen time, stress, and sleep duration
-    brain_score = max(0, 100 - (screen * 10 + stress * 5 + (8 - sleep) * 3))
+    # **Brain Detox Score Calculation**
+    # Factors: Screen time ↑ bad, Stress ↑ bad, Sleep ↓ bad, Water ↓ bad
+    brain_penalty = (screen * 8) + (stress * 5) + max(0, (7 - sleep) * 4) + max(0, (3 - water) * 5)
+    brain_score = max(0, 100 - brain_penalty)
 
-    # **Heart Detox Score Calculation:**
-    # Heart detox affected by heart rate, stress, and exercise levels
+    # **Heart Detox Score Calculation**
+    # Factors: Heart rate away from optimal, Stress ↑ bad, Screen time ↑ bad, Exercise ↓ bad
     optimal_heart_rate = 70
-    heart_score = max(0, 100 - abs(hr - optimal_heart_rate) * 1.5 - stress * 2 + (exercise / 30) * 5)
+    heart_penalty = abs(hr - optimal_heart_rate) * 1.2 + (stress * 3) + (screen * 2) - (exercise / 30) * 4
+    heart_score = max(0, 100 - heart_penalty)
 
-    # **Liver Detox Score Calculation:**
-    # Liver detox affected by water intake, late dinner, and stress
-    liver_score = max(0, 100 - (late_dinner_penalty(dinner) + 5 * (8 - water) + stress * 2))
+    # **Liver Detox Score Calculation**
+    # Factors: Late dinner ↑ bad, Water ↓ bad, Stress ↑ bad, Sleep ↓ bad
+    liver_penalty = late_dinner_penalty(dinner) + max(0, (3 - water) * 8) + (stress * 2) + max(0, (7 - sleep) * 2)
+    liver_score = max(0, 100 - liver_penalty)
 
-    # Generate suggestion logic based on the user's data
+    # Generate Suggestions
     suggestion = generate_suggestions(water, screen, stress, sleep, exercise, dinner)
 
     return int(brain_score), int(liver_score), int(heart_score), suggestion
 
 def late_dinner_penalty(dinner_time):
-    # Convert dinner time (HH:MM) to hour for calculation
     dinner_hour = int(dinner_time.split(":")[0]) if dinner_time else 20
-    # Penalty for having dinner late
     return 15 if dinner_hour > 21 else 0
 
 def generate_suggestions(water, screen, stress, sleep, exercise, dinner):
-    # Suggestion logic based on user input
     suggestions = []
 
-    # Liver Suggestions (Hydration & Dinner Time)
     if water < 3:
-        suggestions.append("You should drink more water to improve liver function.")
-    
-    # Late Dinner Suggestion
+        suggestions.append("Increase your water intake to support both brain and liver detoxification.")
+
     if int(dinner.split(":")[0]) > 21:
-        suggestions.append("Try to have dinner earlier to support liver detox.")
-    
-    # Screen Time Suggestions
+        suggestions.append("Try to have dinner earlier to support liver detox and better sleep.")
+
     if screen > 2:
-        suggestions.append("Try reducing screen time, especially before bed, to support brain detox and improve sleep quality.")
-    
-    # Stress Level Suggestions
+        suggestions.append("Reduce screen time to support brain and heart detoxification.")
+
     if stress > 5:
-        suggestions.append("Consider stress-relief techniques like meditation or deep breathing exercises.")
-    
-    # Sleep Suggestions
+        suggestions.append("Practice relaxation techniques like meditation to manage stress.")
+
     if sleep < 7:
-        suggestions.append("Aim for at least 7 hours of sleep to support brain detox and overall health.")
+        suggestions.append("Aim for at least 7 hours of sleep to support brain and liver health.")
 
-    # Exercise Suggestions
     if exercise < 150:
-        suggestions.append("Regular exercise is crucial for cardiovascular health. Aim for at least 150 minutes of moderate activity per week.")
+        suggestions.append("Increase your physical activity to enhance heart health and overall detox.")
 
-    # General Health and Encouragement
     if not suggestions:
-        suggestions.append("Keep up the great work! Your detox scores are on track.")
+        suggestions.append("Excellent habits! Keep it up to maintain optimal detox scores.")
 
-    # Combine all suggestions
     return " ".join(suggestions)

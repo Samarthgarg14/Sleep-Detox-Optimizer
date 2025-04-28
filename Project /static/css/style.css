@@ -1,41 +1,52 @@
+/* ===== General Body ===== */
 body {
   font-family: 'Segoe UI', sans-serif;
   background: linear-gradient(to right, #33c8af, #e8dfdf);
   color: #2b2b2b;
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-/* Container */
+/* ===== Container ===== */
 .container {
   max-width: 900px;
   margin: auto;
   padding: 2rem;
+  flex: 1;
 }
 
-/* Header */
-header {
+/* ===== Header ===== */
+#header {
   text-align: center;
   margin-bottom: 2rem;
 }
 
-header h1 {
+#header h1 {
   font-size: 2.5rem;
   color: #0b2545;
   margin-bottom: 0.5rem;
 }
 
-header p {
+#header p {
   color: #4b5563;
   font-size: 1.1rem;
 }
 
-/* === Detox Score Cards === */
+/* ===== Detox Score Cards ===== */
+#detox-scores {
+  background: #e8f4fd;
+  padding: 40px 20px;
+  border-radius: 16px;
+  margin-bottom: 2rem;
+}
+
 .score-cards {
   display: flex;
   gap: 1rem;
   justify-content: space-between;
-  margin-bottom: 2rem;
   flex-wrap: wrap;
 }
 
@@ -73,8 +84,51 @@ header p {
   color: #64748b;
 }
 
-/* === Graphs Section === */
+/* ===== About Section ===== */
+#about {
+  background: #ffffff;
+  padding: 40px 20px;
+  border-radius: 16px;
+  margin-bottom: 2rem;
+}
+
+/* ===== Science Behind Sleep Detox Section ===== */
+#science {
+  background: #f0f0f0;
+  padding: 40px 20px;
+  border-radius: 16px;
+  margin-bottom: 2rem;
+}
+
+/* ===== How It Works Section ===== */
+#how-it-works {
+  background: #fff9e6;
+  padding: 40px 20px;
+  border-radius: 16px;
+  margin-bottom: 2rem;
+}
+
+/* ===== Steps to Maximize Section ===== */
+#steps {
+  background: #e9f9e8;
+  padding: 40px 20px;
+  border-radius: 16px;
+  margin-bottom: 2rem;
+}
+
+/* ===== Benefits Section ===== */
+#benefits {
+  background: #f5e8f9;
+  padding: 40px 20px;
+  border-radius: 16px;
+  margin-bottom: 2rem;
+}
+
+/* ===== Graphs Section ===== */
 #graphs {
+  background: #e8f9f7;
+  padding: 40px 20px;
+  border-radius: 16px;
   margin-bottom: 2rem;
 }
 
@@ -97,10 +151,18 @@ header p {
   border: 1px dashed #60a5fa;
 }
 
-/* === Chatbot Icon & Popup === */
+/* ===== FAQ Section ===== */
+#faq {
+  background: #fdf5e6;
+  padding: 40px 20px;
+  border-radius: 16px;
+  margin-bottom: 2rem;
+}
+
+/* ===== Chatbot Icon ===== */
 #chatbot-icon {
   position: fixed;
-  bottom: 20px;
+  bottom: 70px; /* Adjusted to give space for the popup */
   right: 20px;
   background: linear-gradient(to right, #3b82f6, #60a5fa);
   color: white;
@@ -117,10 +179,11 @@ header p {
   transform: scale(1.15);
 }
 
+/* ===== Chatbot Popup ===== */
 #chatbot-popup {
   display: none;
   position: fixed;
-  bottom: 85px;
+  bottom: 150px; /* Increased space between the icon and the popup */
   right: 20px;
   width: 320px;
   background-color: white;
@@ -129,8 +192,6 @@ header p {
   border-radius: 14px;
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
   z-index: 998;
-
-  /* Add this */
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -145,8 +206,6 @@ header p {
   padding: 10px;
   border-radius: 8px;
 }
-
-
 
 .chat-message {
   margin-bottom: 10px;
@@ -163,7 +222,7 @@ header p {
   text-align: right;
 }
 
-/* These two should stay within the popup now */
+/* ===== Chatbot Input Area ===== */
 #user-input {
   width: 100%;
   padding: 10px;
@@ -187,4 +246,22 @@ button {
 
 button:hover {
   background: #2563eb;
+}
+
+/* ===== Footer Section ===== */
+#footer {
+  background-color: #f2f2f2;
+  color: #333;
+  text-align: center;
+  padding: 15px;
+  font-size: 14px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 997;
+}
+
+#footer p {
+  margin: 0;
 }
