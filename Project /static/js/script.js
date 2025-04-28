@@ -1,7 +1,8 @@
 // Store user input data for detox calculation
 let userData = {};
-let detoxScores = { brain: 'N/A', heart: 'N/A', liver: 'N/A' };  
-let questionIndex = 0;  
+let detoxScores = { brain: 'N/A', heart: 'N/A', liver: 'N/A' };
+let questionIndex = 0;
+let inTestMode = false; // NEW FLAG
 
 // Questions for the chatbot to ask
 const questions = [
@@ -13,6 +14,9 @@ const questions = [
   "At what time did you have your dinner today? (Please enter in HH:MM format)"
 ];
 
+// Keywords to trigger detox test
+const detoxKeywords = ['detox test', 'detox score', 'start test', 'start detox'];
+
 // Toggle chatbot popup visibility
 function toggleChatbot() {
   const chatbotPopup = document.getElementById('chatbot-popup');
@@ -22,13 +26,14 @@ function toggleChatbot() {
 
     // Reset conversation and start fresh
     const chatbox = document.getElementById('chatbox');
-    chatbox.innerHTML = ''; // Clear previous messages
+    chatbox.innerHTML = '';
 
     userData = {};
     detoxScores = { brain: 'N/A', heart: 'N/A', liver: 'N/A' };
     questionIndex = 0;
+    inTestMode = false;
 
-    startConversation(); // Start when opening
+    startConversation();
     document.getElementById('user-input').focus();
   } else {
     chatbotPopup.style.display = 'none';
@@ -48,9 +53,6 @@ function appendMessage(sender, text) {
 // Start the conversation
 function startConversation() {
   appendMessage('bot', "👋 Hello! I'm your Detox Assistant. How can I help you today?");
-  setTimeout(() => {
-    appendMessage('bot', questions[questionIndex]);
-  }, 800);
 }
 
 // Send message to chatbot and handle input
@@ -68,6 +70,29 @@ function sendMessage() {
 
 // Process user input
 function processUserInput(input) {
+  const lowerInput = input.toLowerCase();
+  
+  if (!inTestMode) {
+    // Check if user wants to start detox test
+    if (detoxKeywords.some(keyword => lowerInput.includes(keyword))) {
+      inTestMode = true;
+      questionIndex = 0;
+      appendMessage('bot', "🧪 Starting your Detox Test!");
+      setTimeout(() => {
+        appendMessage('bot', questions[questionIndex]);
+      }, 800);
+    } else {
+      // Otherwise, handle as general question
+      answerGeneralQuery(input);
+    }
+  } else {
+    // User is in test mode, continue asking questions
+    handleTestQuestions(input);
+  }
+}
+
+// Handle detox survey questions
+function handleTestQuestions(input) {
   let userMessageProcessed = false;
 
   if (questionIndex === 0 && !isNaN(parseFloat(input))) {
@@ -92,10 +117,10 @@ function processUserInput(input) {
     userMessageProcessed = true;
   } else if (questionIndex === 5 && input.match(/\d{1,2}:\d{2}/)) {
     userData.meal = input;
-    appendMessage('bot', `Dinner time recorded as ${input}. Calculating your detox score...`);
+    appendMessage('bot', `Dinner time recorded as ${input}.`);
     userMessageProcessed = true;
   } else {
-    appendMessage('bot', `Please provide a valid response.`);
+    appendMessage('bot', `⚠️ Please provide a valid response.`);
     return;
   }
 
@@ -106,6 +131,7 @@ function processUserInput(input) {
     }, 600);
   } else if (questionIndex === questions.length - 1) {
     fetchDetoxScores(userData);
+    inTestMode = false; // Reset mode
   }
 }
 
@@ -122,6 +148,15 @@ function fetchDetoxScores(data) {
       document.getElementById('heart-score').textContent = data.heart !== undefined ? `${data.heart}%` : 'N/A';
       document.getElementById('liver-score').textContent = data.liver !== undefined ? `${data.liver}%` : 'N/A';
 
+      appendMessage('bot', ` Calculating your detox score... `);
+      setTimeout(() => {
+        appendMessage('bot', `✅ Your detox scores are ready! 🧠: ${data.brain}% 💓: ${data.heart}% 🩺: ${data.liver}%`);
+      }, 1000);
+
+      setTimeout(() => {
+        appendMessage('bot', 'Let\'s improve these scores!');
+      }, 2000);
+
       const suggestionElement = document.getElementById('suggestion');
       if (suggestionElement) {
         suggestionElement.textContent = 'Fetching suggestions...';
@@ -135,16 +170,37 @@ function fetchDetoxScores(data) {
           });
       }
 
-      appendMessage('bot', `✅ Your detox scores are ready! 🧠: ${data.brain}% 💓: ${data.heart}% 🩺: ${data.liver}%`);
-      appendMessage('bot', 'Let\'s improve these scores!');
-      appendMessage('bot', `${data.suggestion}`);
+      setTimeout(() => {
+        appendMessage('bot', `${data.suggestion}`);
+      }, 3000);
 
       detoxScores = { brain: data.brain, heart: data.heart, liver: data.liver };
     })
     .catch(error => console.error('Error fetching detox scores:', error));
 }
 
-// Fetch Gemini suggestions
+// Handle general sleep detox queries
+function answerGeneralQuery(input) {
+  fetch('/gemini-detox-qa', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ query: input }),
+  })
+    .then(response => response.json())
+    .then(data => {
+      if (data.answer) {
+        appendMessage('bot', data.answer);
+      } else {
+        appendMessage('bot', 'Sorry, I could not find a good answer.');
+      }
+    })
+    .catch(error => {
+      console.error('Error answering query:', error);
+      appendMessage('bot', 'An error occurred while fetching the answer.');
+    });
+}
+
+// Fetch Gemini suggestions (no changes)
 async function fetchGeminiSuggestions(userData) {
   return fetch('/get-detox-data', {
     method: 'POST',
@@ -164,7 +220,7 @@ async function fetchGeminiSuggestions(userData) {
     });
 }
 
-// Initialize only input listeners (No conversation start on page load)
+// Initialize input listeners
 document.addEventListener('DOMContentLoaded', () => {
   const input = document.getElementById('user-input');
   input.addEventListener('keypress', (e) => {
