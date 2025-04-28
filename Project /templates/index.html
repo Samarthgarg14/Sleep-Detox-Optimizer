@@ -86,11 +86,8 @@
   <div id="chatbot-icon" onclick="toggleChatbot()">💬</div>
 
   <!-- Chatbot Popup -->
-  <div id="chatbot-popup">
-    <div id="chatbox">
-      <div class="chat-message bot">👋 Hello! I'm your Detox Assistant. How can I help you today?</div>
-      <div id="chat-output" class="space-y-4 mb-4"></div>
-    </div>
+  <div id="chatbot-popup" style="display: none;">
+    <div id="chatbox"></div>
     <input type="text" id="user-input" placeholder="Type your message..." autocomplete="off" />
     <button onclick="sendMessage()">Send</button>
   </div>
