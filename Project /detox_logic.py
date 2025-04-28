@@ -6,7 +6,7 @@ def calculate_detox_scores(data):
     dinner = data.get("meal", "20:00")
     screen = data.get("screen_time", 0)
     stress = data.get("stress", 3)
-    hr = data.get("heart_rate", random.randint(50, 130))
+    hr = data.get("heart_rate", random.randint(45, 100))
     sleep = data.get("sleep", 6)
     pulse = data.get("pulse", 75)
     exercise = data.get("exercise", 0)
