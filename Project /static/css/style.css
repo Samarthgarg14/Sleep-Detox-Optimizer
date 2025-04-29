@@ -141,14 +141,19 @@ body {
 
 #graph-container > div {
   background: #e0f2fe;
-  height: 160px;
+  height: 460px;
   margin-bottom: 1rem;
   border-radius: 12px;
-  text-align: center;
-  line-height: 160px;
-  font-weight: bold;
-  color: #0284c7;
   border: 1px dashed #60a5fa;
+  display: flex;
+  align-items: center;     /* vertical centering */
+  justify-content: center; /* horizontal centering */
+}
+
+#graph-container img {
+  max-height: 420px;
+  max-width: 90%;
+  object-fit: contain;
 }
 
 /* ===== FAQ Section ===== */

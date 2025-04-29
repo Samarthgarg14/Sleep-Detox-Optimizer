@@ -17,32 +17,6 @@ const questions = [
 // Keywords to trigger detox test
 const detoxKeywords = ['detox test', 'detox score', 'start test', 'start detox'];
 
-function formatGeminiResponse(rawText) {
-  if (typeof rawText !== "string" || rawText.trim() === "") {
-    console.error('Invalid Gemini response:', rawText);
-    return '';
-  }
-
-  // First, normalize line breaks (if any weird spacing exists)
-  let text = rawText.replace(/\n/g, ' ').replace(/\s+/g, ' ');
-
-  // Bold Organ Sections like "Brain Detox (Score: 42%) ..."
-  text = text.replace(/<strong>(.*?)<\/strong>/g, '<br><br><strong>$1</strong><br>');
-
-  // Add bullet points before each "Short Tip"
-  text = text.replace(/<strong>(Short Tip \d+:.*?)<\/strong>/g, '<br>&#8226; <strong>$1</strong>');
-
-  // Keep italic formatting (if <em> exists)
-  // Remove misplaced <em> tags at wrong places
-  text = text.replace(/<em>\s*/g, '').replace(/\s*<\/em>/g, '');
-
-  // Optionally clean up any dangling * characters
-  text = text.replace(/\*/g, '');
-
-  return text.trim();
-}
- 
-
 // Toggle chatbot popup visibility
 function toggleChatbot() {
   const chatbotPopup = document.getElementById('chatbot-popup');
@@ -78,7 +52,7 @@ function appendMessage(sender, text) {
 
 // Start the conversation
 function startConversation() {
-  appendMessage('bot', "👋 Hello! I'm your Detox Assistant. How can I help you today?");
+  appendMessage('bot', "👋 Hello! I'm your Detox Assistant. How can I help you today? (Type 'start test' for detox test) ");
 }
 
 // Send message to chatbot and handle input
@@ -195,7 +169,6 @@ function fetchDetoxScores(data) {
             console.error('Error fetching Gemini suggestions:', err);
           });
       }
-      data.suggestion=formatGeminiResponse(data.suggestion);
       setTimeout(() => {
         appendMessage('bot', `${data.suggestion}`);
       }, 3000);

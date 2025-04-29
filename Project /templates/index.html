@@ -94,9 +94,15 @@
     <section id="graphs">
       <h2>📈 Detox Progress Over Time</h2>
       <div id="graph-container">
-        <div id="brain-graph">Brain Detox Graph Here</div>
-        <div id="heart-graph">Heart Detox Graph Here</div>
-        <div id="liver-graph">Liver Detox Graph Here</div>
+        <div id="brain-graph">
+          <img src="{{ url_for('static', filename='images/braindetox.jpeg') }}" alt="Brain Detox Progress">
+        </div>
+        <div id="heart-graph">
+          <img src="{{ url_for('static', filename='images/heartdetox.jpeg') }}" alt="Heart Detox Progress">
+        </div>
+        <div id="liver-graph">
+          <img src="{{ url_for('static', filename='images/liverdetox.jpeg') }}" alt="Liver Detox Progress">
+        </div>
       </div>
     </section>
 
