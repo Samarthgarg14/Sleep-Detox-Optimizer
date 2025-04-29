@@ -115,11 +115,17 @@ function handleTestQuestions(input) {
     userData.exercise = parseFloat(input);
     appendMessage('bot', `Exercise duration: ${input} hour(s).`);
     userMessageProcessed = true;
-  } else if (questionIndex === 5 && input.match(/\d{1,2}:\d{2}/)) {
-    userData.meal = input;
-    appendMessage('bot', `Dinner time recorded as ${input}.`);
-    userMessageProcessed = true;
-  } else {
+  } else if (questionIndex === 5) {
+    const timeMatch = input.match(/^([01]?\d|2[0-3]):([0-5]\d)$/);
+    if (timeMatch) {
+      userData.meal = input;
+      appendMessage('bot', `Dinner time recorded as ${input}.`);
+      userMessageProcessed = true;
+    } else {
+      appendMessage('bot', `⚠️ Please provide a valid time in HH:MM 24-hour format.`);
+      return;
+    }
+  }  else {
     appendMessage('bot', `⚠️ Please provide a valid response.`);
     return;
   }
