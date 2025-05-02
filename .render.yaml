@@ -1,8 +1,0 @@
-services:
-  - type: web
-    name: sleep-detox-optimizer
-    env: python
-    plan: free
-    rootDir: Project
-    buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn app:app
